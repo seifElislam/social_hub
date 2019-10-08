@@ -5,7 +5,10 @@ import sys
 
 
 def main():
-    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'social_hub.settings')
+    # os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'social_hub.settings')
+    STAGE = os.environ.get('STAGE', 'dev')
+    print(">> STAGE: " + STAGE)
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", 'social_hub.settings.%s' % STAGE.lower())
     try:
         from django.core.management import execute_from_command_line
     except ImportError as exc:
