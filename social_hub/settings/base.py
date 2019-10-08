@@ -11,21 +11,24 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
+import environ
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+env = environ.Env()
+environ.Env.read_env(os.path.join(BASE_DIR, '..','.env'))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#mk@(493$q@3xsbaia^(y&+#j(&!q+e9=$j5226d4d*4fjvz-p'
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -66,6 +69,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'social_hub.wsgi.application'
 
